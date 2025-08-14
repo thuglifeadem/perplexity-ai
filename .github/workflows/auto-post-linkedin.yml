@@ -19,7 +19,7 @@ jobs:
       - name: Run script
         env:
           PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API }}  # Store your API key in GitHub Secrets
-        run: python generate_post.py
+        run: python linkedin_poster.py
       - name: Commit and push output
         run: |
           git config --global user.name 'GitHub Action'
