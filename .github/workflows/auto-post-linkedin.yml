@@ -1,0 +1,29 @@
+name: Generate LinkedIn Post
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'  # Runs every Monday at 9 AM UTC (adjust as needed)
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: pip install openai
+      - name: Run script
+        env:
+          PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API }}  # Store your API key in GitHub Secrets
+        run: python generate_post.py
+      - name: Commit and push output
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add linkedin_post.json
+          git commit -m "Generated new LinkedIn post"
+          git push
