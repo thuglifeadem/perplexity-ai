@@ -1,7 +1,7 @@
 from openai import OpenAI
 
 # Replace with your Perplexity API key
-api_key = "YOUR_PERPLEXITY_API_KEY"
+api_key = "PERPLEXITY_API"
 
 client = OpenAI(
     api_key=api_key,
